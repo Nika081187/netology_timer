@@ -37,6 +37,26 @@ class PhotosViewController: UIViewController {
         setupLayout()
         self.navigationItem.title = "Photo Gallery"
         self.navigationController?.navigationBar.isHidden = false
+        
+        let userInfo = "userInfo"
+        
+        let myTimer = Timer(timeInterval: 30, target: self, selector: #selector(timerDidFire), userInfo: userInfo, repeats: true)
+        
+        RunLoop.current.add(myTimer, forMode: RunLoop.Mode.common)
+    }
+    
+    @objc func timerDidFire() {
+        print("Timer!")
+        showReloadAlert()
+    }
+    
+    func showReloadAlert() {
+        let alertController = UIAlertController(title: "Время отдохнуть!", message: "Вы очень долго находитесь на странице, нужно дать отдых глазам! :)", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ок", style: .default) { _ in
+            print("Ок")
+        }
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     func setupLayout() {
